@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import model.Lease;
-import model.unit;
+
 
 public class leaseHelper {
 		static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("JavaIIMiniProject");
@@ -93,7 +93,7 @@ public class leaseHelper {
 		public List<Lease> showAllLeases() {
 			// TODO Auto-generated method stub
 			EntityManager em = emfactory.createEntityManager();
-			List<Lease> allTenants = em.createQuery("SELECT i FROM Lease i").getResultList();
-			return allTenants;
+			List<Lease> allLeases = em.createQuery("SELECT i FROM Lease i").getResultList();
+			return allLeases;
 		}
 }
