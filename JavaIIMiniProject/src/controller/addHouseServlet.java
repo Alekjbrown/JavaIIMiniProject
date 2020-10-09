@@ -32,9 +32,18 @@ public class addHouseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String tenName = request.getParameter("tenant_name");
-		LocalDate dob = request.getParameter("dob");
+		String month = request.getParameter("month");
+		String day = request.getParameter("day");
+		String year = request.getParameter("year");
 		String phone = request.getParameter("phone");
-		Tenant tenant = new Tenant(tenName, dob, phone);
+		LocalDate ld;
+		try {
+			ld = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		}catch(NumberFormatException ex) {
+			ld = LocalDate.now();
+		}
+		
+		Tenant tenant = new Tenant(tenName, ld, phone);
 		tenantHelper dao = new tenantHelper();
 		dao.insertTenant(tenant);
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);

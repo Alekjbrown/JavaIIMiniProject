@@ -11,6 +11,7 @@
 			<attribute name="maven.artifactId" value="javax.persistence"/>
 			<attribute name="maven.version" value="2.1.1"/>
 			<attribute name="maven.scope" value="compile"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/dontf/.m2/repository/javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1.jar" sourcepath="C:/Users/dontf/.m2/repository/javax/servlet/javax.servlet-api/4.0.1/javax.servlet-api-4.0.1-sources.jar">
