@@ -89,7 +89,7 @@ public class tenantHelper {
 		
 	}
 	
-	public List<Tenant> showAllBeans() {
+	public List<Tenant> showAllTenants() {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
 		List<Tenant> allTenants = em.createQuery("SELECT i FROM Tenant i").getResultList();
