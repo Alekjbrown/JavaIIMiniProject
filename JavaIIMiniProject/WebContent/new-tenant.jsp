@@ -19,7 +19,7 @@
 		<input type="text" name="year" placeholder="yyyy" size="4"><br>
 		
 		<label for="phone">Phone: </label>
-		<input type="text" id="phone" name="text" placeholder="555-555-5555"><br>
+		<input type="text" id="phone" name="phone" placeholder="555-555-5555"><br>
 		
 		<input type="submit" value="Create Tenant">
 	</form>

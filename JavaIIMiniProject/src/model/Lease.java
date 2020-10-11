@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -16,9 +17,9 @@ public class Lease {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="LEASE_ID")
 	private int id;
-	@Column(name="UNIT_ID")
+	@JoinColumn(name="UNIT_ID")
 	private Unit unit;
-	@Column(name="TENANT_ID")
+	@JoinColumn(name="TENANT_ID")
 	private Tenant tenant;
 	@Column(name="TERM")
 	private int term;

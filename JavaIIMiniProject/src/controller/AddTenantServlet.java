@@ -13,16 +13,18 @@ import model.Tenant;
 import controller.tenantHelper;
 
 /**
- * Servlet implementation class addHouseServlet
+ * Servlet implementation class AddTenantServlet
  */
-@WebServlet("/addHouseServlet")
-public class addHouseServlet extends HttpServlet {
+
+// RENAMED addHouseServlet to update tenant only
+@WebServlet("/addTenantServlet")
+public class AddTenantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor. 
      */
-    public addHouseServlet() {
+    public AddTenantServlet() {
         // TODO Auto-generated constructor stub
     }
 
@@ -31,7 +33,7 @@ public class addHouseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String tenName = request.getParameter("tenant_name");
+		String tenName = request.getParameter("name");
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
 		String year = request.getParameter("year");
