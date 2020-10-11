@@ -9,10 +9,10 @@ import javax.persistence.TypedQuery;
 
 import model.Unit;
 
-public class unitHelper {
-	static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("JavaIIMiniProject");
+public class UnitHelper {
+	static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("RentalLeases");
 	
-	public void insertTenant(Unit unit) {
+	public void insertUnit(Unit unit) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(unit);
@@ -20,7 +20,7 @@ public class unitHelper {
 		em.close();
 	}
 	
-	public void deleteTenant(Unit toDelete) {
+	public void deleteUnit(Unit toDelete) {
 		EntityManager em = emfactory.createEntityManager(); // unit tenant term endDate
 		em.getTransaction().begin();
 		TypedQuery<Unit> typedQuery = em.createQuery("select li from Lease li where "
@@ -40,16 +40,29 @@ public class unitHelper {
 		em.getTransaction().commit();
 		em.close();
 	}
+
+	// TODO this method duplicates the method written right below it and returns a list not
+	// a single item found by id. If this if for returning everything it should be named "getAll()"
+	//or something similar with no input parameters.
 	
-	public List<Unit> searchForUnitByID(int unitId) {
+//	public List<Unit> searchForUnitByID(int unitId) {
+//		EntityManager em = emfactory.createEntityManager();
+//		em.getTransaction().begin();
+//		TypedQuery<Unit> typedQuery = em.createQuery("select li from "
+//				+ "Unit li where li.id = ::selectedUnitId", Unit.class);
+//		typedQuery.setParameter("selectedUnitId", unitId);
+//		List<Unit> foundItems = typedQuery.getResultList();
+//		em.close();
+//		return foundItems;
+//	}
+	
+	public Unit searchForUnitById(int unitId) {
+		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Unit> typedQuery = em.createQuery("select li from "
-				+ "Unit li where li.id = ::selectedUnitId", Unit.class);
-		typedQuery.setParameter("selectedUnitId", unitId);
-		List<Unit> foundItems = typedQuery.getResultList();
+		Unit found = em.find(Unit.class, unitId);
 		em.close();
-		return foundItems;
+		return found;
 	}
 	
 	public List<Unit> searchForUnitByAddress(String addr) {
@@ -63,14 +76,7 @@ public class unitHelper {
 		return foundItems;
 	}
 	
-	public Unit searchForTenantById(int idToEdit) {
-		// TODO Auto-generated method stub
-		EntityManager em = emfactory.createEntityManager();
-		em.getTransaction().begin();
-		Unit found = em.find(Unit.class, idToEdit);
-		em.close();
-		return found;
-	}
+
 	
 	public void updateUnit(Unit toEdit) {
 		// TODO Auto-generated method stub
@@ -88,10 +94,11 @@ public class unitHelper {
 		
 	}
 	
-	public List<Unit> showAllLeases() {
+	
+	public List<Unit> showAllUnits() {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
-		List<Unit> allLeases = em.createQuery("SELECT i FROM Unit i").getResultList();
-		return allLeases;
+		List<Unit> allUnits = em.createQuery("SELECT i FROM Unit i").getResultList();
+		return allUnits;
 	}
 }

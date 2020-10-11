@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Unit {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="UNIT_ID")
+	@Column(name="ID")
 	private int id;
 	@Column(name="NUM_BEDS")
 	private int beds;

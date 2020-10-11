@@ -10,10 +10,10 @@ import javax.persistence.TypedQuery;
 import model.Lease;
 
 
-public class leaseHelper {
-		static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("JavaIIMiniProject");
+public class LeaseHelper {
+		static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("RentalLeases");
 		
-		public void insertTenant(Lease lease) {
+		public void insertLease(Lease lease) {
 			EntityManager em = emfactory.createEntityManager();
 			em.getTransaction().begin();
 			em.persist(lease);
@@ -21,7 +21,7 @@ public class leaseHelper {
 			em.close();
 		}
 		
-		public void deleteTenant(Lease toDelete) {
+		public void deleteLease(Lease toDelete) {
 			EntityManager em = emfactory.createEntityManager(); // unit tenant term endDate
 			em.getTransaction().begin();
 			TypedQuery<Lease> typedQuery = em.createQuery("select li from Lease li where "
@@ -65,11 +65,11 @@ public class leaseHelper {
 			return foundItems;
 		}
 		
-		public Lease searchForTenantById(int idToEdit) {
+		public Lease searchForLeaseById(int leaseId) {
 			// TODO Auto-generated method stub
 			EntityManager em = emfactory.createEntityManager();
 			em.getTransaction().begin();
-			Lease found = em.find(Lease.class, idToEdit);
+			Lease found = em.find(Lease.class, leaseId);
 			em.close();
 			return found;
 		}
