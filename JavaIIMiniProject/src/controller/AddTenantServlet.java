@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Tenant;
-import controller.tenantHelper;
+import controller.TenantHelper;
 
 /**
  * Servlet implementation class AddTenantServlet
@@ -46,7 +46,7 @@ public class AddTenantServlet extends HttpServlet {
 		}
 		
 		Tenant tenant = new Tenant(tenName, ld, phone);
-		tenantHelper dao = new tenantHelper();
+		TenantHelper dao = new TenantHelper();
 		dao.insertTenant(tenant);
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 		

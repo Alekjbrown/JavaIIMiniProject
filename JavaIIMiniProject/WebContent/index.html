@@ -8,12 +8,11 @@
 	<h1>Leases Tracker</h1>
 	<h2>CIS_175 Java II Mini Project</h2>
 	<h3>Alek Brown &amp; Chad Burgett</h3>
-	
-	<form action="new-tenant.jsp">
-		<input type="submit" value="Create New Tenant">
-	</form>
-	<form action="new-unit.jsp">
-		<input type="submit" value="Create New Unit">
-	</form>
+	<button onclick="window.location.href='viewTenantsServlet'">View All Tenants</button>&nbsp;
+	<button onclick="window.location.href='viewUnitsServlet'">View All Units</button>&nbsp;
+	<button onclick="window.location.href='viewLeasesServlet'">View All Leases</button><br>
+	<button onclick="window.location.href='new-tenant.jsp'">Create New Tenant</button>&nbsp;
+	<button onclick="window.location.href='new-unit.jsp'">Create New Unit</button>&nbsp;
+	<button onclick="window.location.href='addUnitsForLeaseServlet'">Create New Lease</button><br>
 </body>
 </html>

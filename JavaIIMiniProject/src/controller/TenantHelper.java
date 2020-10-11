@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 
 import model.Tenant;
 
-public class tenantHelper {
+public class TenantHelper {
 	static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("RentalLeases");
 	
 	public void insertTenant(Tenant tenant) {

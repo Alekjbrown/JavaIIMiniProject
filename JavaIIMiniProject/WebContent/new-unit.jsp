@@ -17,7 +17,7 @@
 		<label for="floor">Floor: </label>
 		<input type="number" id="floor" name="floor" size="4" required><br>
 		<label for="address">Address: </label>
-		<input type="text" id="address" name="address" required placeholder="123 abc st, City, ST, Zip"><br>
+		<input type="text" id="address" name="address" required placeholder="123 abc st, UNIT, City, ST, Zip"><br>
 		<input type="submit" name="Add New Unit">
 	</form>
 	<br>

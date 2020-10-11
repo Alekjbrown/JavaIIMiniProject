@@ -94,13 +94,11 @@ public class UnitHelper {
 		
 	}
 	
-	//TODO this method should not be named leases or interact with leases, that will get handled in LeaseHelper.java
-	// If returning all units see note above as well. One of the two can likely be removed. updateUnit above is used for editing.
 	
-	public List<Unit> showAllLeases() {
+	public List<Unit> showAllUnits() {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
-		List<Unit> allLeases = em.createQuery("SELECT i FROM Unit i").getResultList();
-		return allLeases;
+		List<Unit> allUnits = em.createQuery("SELECT i FROM Unit i").getResultList();
+		return allUnits;
 	}
 }
