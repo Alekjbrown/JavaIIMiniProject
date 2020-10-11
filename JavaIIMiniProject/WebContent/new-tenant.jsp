@@ -23,5 +23,9 @@
 		
 		<input type="submit" value="Create Tenant">
 	</form>
+	<br>
+	<form action="index.html">
+		<input type="submit" value="Home">
+	</form>
 </body>
 </html>

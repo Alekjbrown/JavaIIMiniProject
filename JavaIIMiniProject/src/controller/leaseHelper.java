@@ -11,7 +11,7 @@ import model.Lease;
 
 
 public class leaseHelper {
-		static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("JavaIIMiniProject");
+		static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("RentalLeases");
 		
 		public void insertTenant(Lease lease) {
 			EntityManager em = emfactory.createEntityManager();
