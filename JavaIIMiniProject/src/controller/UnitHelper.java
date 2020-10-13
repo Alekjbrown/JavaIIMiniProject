@@ -23,8 +23,8 @@ public class UnitHelper {
 	public void deleteUnit(Unit toDelete) {
 		EntityManager em = emfactory.createEntityManager(); // unit tenant term endDate
 		em.getTransaction().begin();
-		TypedQuery<Unit> typedQuery = em.createQuery("select li from Lease li where "
-				+ "li.unit_id = :selectedUnitId", Unit.class);
+		TypedQuery<Unit> typedQuery = em.createQuery("select li from Unit li where "
+				+ "li.id = :selectedUnitId", Unit.class);
 		
 		//Substitute parameter with actual data from the toDelete item
 		typedQuery.setParameter("selectedUnitId", toDelete.getId());
@@ -41,21 +41,6 @@ public class UnitHelper {
 		em.close();
 	}
 
-	// TODO this method duplicates the method written right below it and returns a list not
-	// a single item found by id. If this if for returning everything it should be named "getAll()"
-	//or something similar with no input parameters.
-	
-//	public List<Unit> searchForUnitByID(int unitId) {
-//		EntityManager em = emfactory.createEntityManager();
-//		em.getTransaction().begin();
-//		TypedQuery<Unit> typedQuery = em.createQuery("select li from "
-//				+ "Unit li where li.id = ::selectedUnitId", Unit.class);
-//		typedQuery.setParameter("selectedUnitId", unitId);
-//		List<Unit> foundItems = typedQuery.getResultList();
-//		em.close();
-//		return foundItems;
-//	}
-	
 	public Unit searchForUnitById(int unitId) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();

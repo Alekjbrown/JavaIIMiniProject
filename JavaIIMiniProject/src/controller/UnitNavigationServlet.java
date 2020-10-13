@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Unit;
+
 /**
  * Servlet implementation class UnitNavigationServlet
  */
@@ -35,7 +37,34 @@ public class UnitNavigationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		UnitHelper dao = new UnitHelper();
+		String act = request.getParameter("doThisToUnit");
+		if (act == null) {
+			// no button has been selected
+			getServletContext().getRequestDispatcher("/viewUnitsServlet").forward(request, response);
+		}
+		else if (act.equals("delete")) {
+			try {
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				Unit itemToDelete = dao.searchForUnitById(tempId);
+				dao.deleteUnit(itemToDelete);
+			}catch (NumberFormatException e) {
+				System.out.println("Forgot to select an item");
+			}			
+		} else if (act.equals("edit")) {
+			try {
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				Unit unitToEdit = dao.searchForUnitById(tempId);
+				request.setAttribute("UnitToEdit", unitToEdit);
+				getServletContext().getRequestDispatcher("/edit-unit.jsp").forward(request, response);
+			} catch (NumberFormatException e) {
+				System.out.println("Forgot to select an item");
+			}
+		} else if (act.equals("add")) {
+			getServletContext().getRequestDispatcher("/new-unit.jsp").forward(request, response);
+			
+		}
+						
 	}
 
 }
