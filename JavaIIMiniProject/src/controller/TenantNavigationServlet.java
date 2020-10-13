@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Tenant;
+import controller.TenantHelper;
+
 /**
  * Servlet implementation class TenantNavigationServlet
  */
@@ -35,7 +38,35 @@ public class TenantNavigationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+				TenantHelper dao = new TenantHelper();
+				String act = request.getParameter("doThisToTenant");
+				if (act == null) {
+					// no button has been selected
+					getServletContext().getRequestDispatcher("/viewTenantsServlet").forward(request, response);
+				}
+				else if (act.equals("delete")) {
+					try {
+						Integer tempId = Integer.parseInt(request.getParameter("id"));
+						Tenant itemToDelete = dao.searchForTenantById(tempId);
+						dao.deleteTenant(itemToDelete);
+					}catch (NumberFormatException e) {
+						System.out.println("Forgot to select an item");
+					}			
+				} else if (act.equals("edit")) {
+					try {
+						Integer tempId = Integer.parseInt(request.getParameter("id"));
+						Tenant tenantToEdit = dao.searchForTenantById(tempId);
+						request.setAttribute("TenantToEdit", tenantToEdit);
+						getServletContext().getRequestDispatcher("/edit-tenant.jsp").forward(request, response);
+					} catch (NumberFormatException e) {
+						System.out.println("Forgot to select an item");
+					}
+				} else if (act.equals("add")) {
+					getServletContext().getRequestDispatcher("/new-tenant.jsp").forward(request, response);
+					
+				}
+								
+			}
+	
 
 }

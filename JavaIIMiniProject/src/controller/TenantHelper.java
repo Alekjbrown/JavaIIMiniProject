@@ -23,8 +23,8 @@ public class TenantHelper {
 	public void deleteTenant(Tenant toDelete) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Tenant> typedQuery = em.createQuery("select li from Tenant li where "
-				+ "li.tenant_name = :selectedTenantName and li.phone = :selectedPhone", Tenant.class);
+		TypedQuery<Tenant> typedQuery = em.createQuery("select li from Tenant li where li.tenantName = :selectedTenantName and "
+				+ "li.phone = :selectedPhone", Tenant.class);
 		
 		//Substitute parameter with actual data from the toDelete item
 		typedQuery.setParameter("selectedTenantName", toDelete.getTenantName());
@@ -34,6 +34,7 @@ public class TenantHelper {
 		typedQuery.setMaxResults(1);
 		
 		//get the result and save it into a new list item
+		
 		Tenant result = typedQuery.getSingleResult();
 		
 		//remove it
@@ -46,7 +47,7 @@ public class TenantHelper {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<Tenant> typedQuery = em.createQuery("select li from "
-				+ "Tenant li where li.tenant_name = ::selectedTenantName", Tenant.class);
+				+ "Tenant tenant where tenant.tenantName = ::selectedTenantName", Tenant.class);
 		typedQuery.setParameter("selectedTenantName", tenantName);
 		List<Tenant> foundItems = typedQuery.getResultList();
 		em.close();
