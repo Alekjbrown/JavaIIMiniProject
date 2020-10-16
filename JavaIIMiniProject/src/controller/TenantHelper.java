@@ -1,10 +1,12 @@
 package controller;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import model.Tenant;
@@ -20,7 +22,7 @@ public class TenantHelper {
 		em.close();
 	}
 	
-	public void deleteTenant(Tenant toDelete) {
+	public void deleteTenant(Tenant toDelete) throws RollbackException {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		TypedQuery<Tenant> typedQuery = em.createQuery("select li from Tenant li where li.tenantName = :selectedTenantName and "
@@ -37,7 +39,6 @@ public class TenantHelper {
 		
 		Tenant result = typedQuery.getSingleResult();
 		
-		//remove it
 		em.remove(result);
 		em.getTransaction().commit();
 		em.close();

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import model.Unit;
@@ -20,7 +21,7 @@ public class UnitHelper {
 		em.close();
 	}
 	
-	public void deleteUnit(Unit toDelete) {
+	public void deleteUnit(Unit toDelete) throws RollbackException{
 		EntityManager em = emfactory.createEntityManager(); // unit tenant term endDate
 		em.getTransaction().begin();
 		TypedQuery<Unit> typedQuery = em.createQuery("select li from Unit li where "

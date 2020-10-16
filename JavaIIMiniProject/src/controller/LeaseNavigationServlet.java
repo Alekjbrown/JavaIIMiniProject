@@ -48,6 +48,7 @@ public class LeaseNavigationServlet extends HttpServlet {
 						Integer tempId = Integer.parseInt(request.getParameter("id"));
 						Lease itemToDelete = dao.searchForLeaseById(tempId);
 						dao.deleteLease(itemToDelete);
+						getServletContext().getRequestDispatcher("/viewLeasesServlet").forward(request, response);
 					}catch (NumberFormatException e) {
 						System.out.println("Forgot to select an item");
 					}			
