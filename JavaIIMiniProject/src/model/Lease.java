@@ -24,7 +24,7 @@ public class Lease {
 	@JoinColumn(name="UNIT_ID")
 	private Unit unit;
 	@JoinColumn(name="TENANT_ID")
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
 	private Tenant tenant;
 	@Column(name="TERM")
 	private int term;

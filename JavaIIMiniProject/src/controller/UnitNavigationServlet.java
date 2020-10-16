@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.persistence.RollbackException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,13 +46,21 @@ public class UnitNavigationServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/viewUnitsServlet").forward(request, response);
 		}
 		else if (act.equals("delete")) {
-			try {
-				Integer tempId = Integer.parseInt(request.getParameter("id"));
-				Unit itemToDelete = dao.searchForUnitById(tempId);
-				dao.deleteUnit(itemToDelete);
-			}catch (NumberFormatException e) {
-				System.out.println("Forgot to select an item");
-			}			
+				try {
+					Integer tempId = Integer.parseInt(request.getParameter("id"));
+					Unit itemToDelete = dao.searchForUnitById(tempId);
+					dao.deleteUnit(itemToDelete);
+					getServletContext().getRequestDispatcher("/viewUnitsServlet").forward(request, response);
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Forgot to select an item");
+				} catch (RollbackException ee) {
+					ee.printStackTrace();
+					System.out.println("Foreign Key Constraint");
+					getServletContext().getRequestDispatcher("/viewUnitsServlet").forward(request, response);
+				}
+	
 		} else if (act.equals("edit")) {
 			try {
 				Integer tempId = Integer.parseInt(request.getParameter("id"));

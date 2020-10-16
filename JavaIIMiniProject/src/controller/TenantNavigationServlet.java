@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
+
+import javax.persistence.RollbackException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,8 +52,14 @@ public class TenantNavigationServlet extends HttpServlet {
 						Integer tempId = Integer.parseInt(request.getParameter("id"));
 						Tenant itemToDelete = dao.searchForTenantById(tempId);
 						dao.deleteTenant(itemToDelete);
+						getServletContext().getRequestDispatcher("/viewTenantsServlet").forward(request, response);
 					}catch (NumberFormatException e) {
 						System.out.println("Forgot to select an item");
+					} catch (RollbackException ee) {
+						// TODO Auto-generated catch block
+						ee.printStackTrace();
+						System.out.println("foreign key constraint");
+						getServletContext().getRequestDispatcher("/viewTenantsServlet").forward(request, response);
 					}			
 				} else if (act.equals("edit")) {
 					try {
