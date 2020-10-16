@@ -10,8 +10,8 @@
 <body>
 <form action = "editLeaseServlet" method="post">
 <input type ="hidden" name = "id" value= "${LeaseToEdit.id}">
-Unit Address: <input type ="text" name = "unit" value="${LeaseToEdit.unit}">
-Tenant Name: <input type ="text" name = "tenant" value="${LeaseToEdit.tenant}">
+Unit Address: <input type ="text" name = "unit" value="${LeaseToEdit.unit.address}">
+Tenant Name: <input type ="text" name = "tenant" value="${LeaseToEdit.tenant.tenantName}">
 Term: <input type ="text" name = "term" value="${LeaseToEdit.term}">
 End Date:<input type ="text" name = "month" placeholder="mm" size="4" value= "${month}"> <input type ="text" name = "day"
 placeholder="dd" size="4" value= "${date}">, <input type ="text" name= "year" placeholder="yyyy" size="4" value= "${year}">
