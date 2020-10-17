@@ -48,6 +48,7 @@ public class LeaseNavigationServlet extends HttpServlet {
 						Integer tempId = Integer.parseInt(request.getParameter("id"));
 						Lease itemToDelete = dao.searchForLeaseById(tempId);
 						dao.deleteLease(itemToDelete);
+						System.out.println("deleted");
 						getServletContext().getRequestDispatcher("/viewLeasesServlet").forward(request, response);
 					}catch (NumberFormatException e) {
 						System.out.println("Forgot to select an item");
@@ -57,9 +58,22 @@ public class LeaseNavigationServlet extends HttpServlet {
 						Integer tempId = Integer.parseInt(request.getParameter("id"));
 						Lease leaseToEdit = dao.searchForLeaseById(tempId);
 						request.setAttribute("LeaseToEdit", leaseToEdit);
+						
+						request.setAttribute("month", leaseToEdit.getEndDate().getMonthValue());
+						request.setAttribute("date", leaseToEdit.getEndDate().getDayOfMonth());
+						request.setAttribute("year", leaseToEdit.getEndDate().getYear());
+						
+						UnitHelper daoForUnits = new UnitHelper();
+						request.setAttribute("allUnits", daoForUnits.showAllUnits());
+						
+						if(daoForUnits.showAllUnits().isEmpty()) {
+							request.setAttribute("allItems", " ");
+						}
+						
 						getServletContext().getRequestDispatcher("/edit-lease.jsp").forward(request, response);
 					} catch (NumberFormatException e) {
 						System.out.println("Forgot to select an item");
+						getServletContext().getRequestDispatcher("/viewLeasesServlet").forward(request, response);
 					}
 				} else if (act.equals("add")) {
 					getServletContext().getRequestDispatcher("/new-lease.jsp").forward(request, response);
